@@ -2,9 +2,10 @@ module Main exposing (..)
 
 import Browser
 
-import Element exposing (Element, el, text, column, row, alignRight, fill, px, width, rgb255, spacing, centerX, centerY, padding, height)
+import Element exposing (Element, el, text, column, row, alignRight, fill, px, width, rgb255, spacing, centerX, centerY, padding, height, paddingXY)
 import Element.Background as Background
 import Element.Border as Border
+import Element.Font as Font
 import Element.Input as Input
 
 type alias Model = { count: Int, weight: Float, water: Float }
@@ -58,19 +59,19 @@ calcYeast model = (calcFlour model) * yeastRatio
 roundTo digits val = String.fromFloat (toFloat (Basics.round (val * 10^digits)) / 10^digits)
 
 view model = Element.layout [] (column [ spacing 30, centerY, centerX, width (px 390) ]
---  row [ width fill, centerY, spacing 30 ]
   [
     row []
-    [ Input.text [] { onChange = UpdateCount , text = String.fromInt model.count   , label = Input.labelRight [] (text "delicious Pizza(s)"), placeholder = Maybe.Nothing }
+    [ Input.text [] { onChange = UpdateCount , text = String.fromInt model.count   , label = Input.labelRight [] (text "very superbly delicious Pizza(s)"), placeholder = Maybe.Nothing }
     , Input.button [ padding 5, spacing 5 ] { onPress = Just Decrement, label = text "-" }
     , Input.button [ padding 5, spacing 5 ] { onPress = Just Increment, label = text "+" }
     ]
   , Input.text [] { onChange = UpdateWeight, text = String.fromFloat model.weight, label = Input.labelRight [] (text "grams (dough ball weight)"), placeholder = Maybe.Nothing }
   , Input.text [] { onChange = UpdateWater , text = String.fromFloat model.water , label = Input.labelRight [] (text "% water content (in bakers percents)"), placeholder = Maybe.Nothing }
-  , el [ height (px 20) ] ( text "" )
-  , el [] (text "~~ Recipe ~~")
-  , row [] [ text "Flour: ", text (roundTo 0 (calcFlour model)), text " g"]
-  , row [] [ text "Water: ", text (roundTo 0 (calcWater model)), text " ml"]
-  , row [] [ text "Salt: " , text (roundTo 1 (calcSalt  model)), text " g"]
-  , row [] [ text "Yeast: ", text (roundTo 2 (calcYeast model)), text " g"]
+  , column [ centerX, spacing 25, Font.size 32 ]
+    [ el [ Font.italic, Font.size 28, centerX, paddingXY 0 20 ] (text "~~ Recipe ~~")
+    , row [ Font.bold ] [ text (roundTo 0 (calcFlour model)), text " g" , text " Flour" ] 
+    , row [ Font.bold ] [ text (roundTo 0 (calcWater model)), text " ml", text " Water" ]
+    , row [ Font.bold ] [ text (roundTo 1 (calcSalt  model)), text " g" , text " Salt"  ]
+    , row [ Font.bold ] [ text (roundTo 2 (calcYeast model)), text " g" , text " Yeast" ]
+    ]
   ])
