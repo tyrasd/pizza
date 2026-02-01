@@ -807,6 +807,43 @@ var _List_sortWith = F2(function(f, xs)
 
 
 
+var _Bitwise_and = F2(function(a, b)
+{
+	return a & b;
+});
+
+var _Bitwise_or = F2(function(a, b)
+{
+	return a | b;
+});
+
+var _Bitwise_xor = F2(function(a, b)
+{
+	return a ^ b;
+});
+
+function _Bitwise_complement(a)
+{
+	return ~a;
+};
+
+var _Bitwise_shiftLeftBy = F2(function(offset, a)
+{
+	return a << offset;
+});
+
+var _Bitwise_shiftRightBy = F2(function(offset, a)
+{
+	return a >> offset;
+});
+
+var _Bitwise_shiftRightZfBy = F2(function(offset, a)
+{
+	return a >>> offset;
+});
+
+
+
 // MATH
 
 var _Basics_add = F2(function(a, b) { return a + b; });
@@ -3954,43 +3991,6 @@ function _VirtualDom_dekey(keyedNode)
 
 
 
-var _Bitwise_and = F2(function(a, b)
-{
-	return a & b;
-});
-
-var _Bitwise_or = F2(function(a, b)
-{
-	return a | b;
-});
-
-var _Bitwise_xor = F2(function(a, b)
-{
-	return a ^ b;
-});
-
-function _Bitwise_complement(a)
-{
-	return ~a;
-};
-
-var _Bitwise_shiftLeftBy = F2(function(offset, a)
-{
-	return a << offset;
-});
-
-var _Bitwise_shiftRightBy = F2(function(offset, a)
-{
-	return a >> offset;
-});
-
-var _Bitwise_shiftRightZfBy = F2(function(offset, a)
-{
-	return a >>> offset;
-});
-
-
-
 
 // ELEMENT
 
@@ -4524,6 +4524,25 @@ var $author$project$Main$UpdateWater = function (a) {
 var $author$project$Main$UpdateWeight = function (a) {
 	return {$: 'UpdateWeight', a: a};
 };
+var $mdgriffith$elm_ui$Internal$Model$Class = F2(
+	function (a, b) {
+		return {$: 'Class', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Internal$Style$classes = {above: 'a', active: 'atv', alignBottom: 'ab', alignCenterX: 'cx', alignCenterY: 'cy', alignContainerBottom: 'acb', alignContainerCenterX: 'accx', alignContainerCenterY: 'accy', alignContainerRight: 'acr', alignLeft: 'al', alignRight: 'ar', alignTop: 'at', alignedHorizontally: 'ah', alignedVertically: 'av', any: 's', behind: 'bh', below: 'b', bold: 'w7', borderDashed: 'bd', borderDotted: 'bdt', borderNone: 'bn', borderSolid: 'bs', capturePointerEvents: 'cpe', clip: 'cp', clipX: 'cpx', clipY: 'cpy', column: 'c', container: 'ctr', contentBottom: 'cb', contentCenterX: 'ccx', contentCenterY: 'ccy', contentLeft: 'cl', contentRight: 'cr', contentTop: 'ct', cursorPointer: 'cptr', cursorText: 'ctxt', focus: 'fcs', focusedWithin: 'focus-within', fullSize: 'fs', grid: 'g', hasBehind: 'hbh', heightContent: 'hc', heightExact: 'he', heightFill: 'hf', heightFillPortion: 'hfp', hover: 'hv', imageContainer: 'ic', inFront: 'fr', inputLabel: 'lbl', inputMultiline: 'iml', inputMultilineFiller: 'imlf', inputMultilineParent: 'imlp', inputMultilineWrapper: 'implw', inputText: 'it', italic: 'i', link: 'lnk', nearby: 'nb', noTextSelection: 'notxt', onLeft: 'ol', onRight: 'or', opaque: 'oq', overflowHidden: 'oh', page: 'pg', paragraph: 'p', passPointerEvents: 'ppe', root: 'ui', row: 'r', scrollbars: 'sb', scrollbarsX: 'sbx', scrollbarsY: 'sby', seButton: 'sbt', single: 'e', sizeByCapital: 'cap', spaceEvenly: 'sev', strike: 'sk', text: 't', textCenter: 'tc', textExtraBold: 'w8', textExtraLight: 'w2', textHeavy: 'w9', textJustify: 'tj', textJustifyAll: 'tja', textLeft: 'tl', textLight: 'w3', textMedium: 'w5', textNormalWeight: 'w4', textRight: 'tr', textSemiBold: 'w6', textThin: 'w1', textUnitalicized: 'tun', transition: 'ts', transparent: 'clr', underline: 'u', widthContent: 'wc', widthExact: 'we', widthFill: 'wf', widthFillPortion: 'wfp', wrapped: 'wrp'};
+var $mdgriffith$elm_ui$Internal$Flag$Flag = function (a) {
+	return {$: 'Flag', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Flag$Second = function (a) {
+	return {$: 'Second', a: a};
+};
+var $elm$core$Basics$gt = _Utils_gt;
+var $elm$core$Bitwise$shiftLeftBy = _Bitwise_shiftLeftBy;
+var $elm$core$Basics$sub = _Basics_sub;
+var $mdgriffith$elm_ui$Internal$Flag$flag = function (i) {
+	return (i > 31) ? $mdgriffith$elm_ui$Internal$Flag$Second(1 << (i - 32)) : $mdgriffith$elm_ui$Internal$Flag$Flag(1 << i);
+};
+var $mdgriffith$elm_ui$Internal$Flag$fontWeight = $mdgriffith$elm_ui$Internal$Flag$flag(13);
+var $mdgriffith$elm_ui$Element$Font$bold = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontWeight, $mdgriffith$elm_ui$Internal$Style$classes.bold);
 var $mdgriffith$elm_ui$Internal$Model$Attr = function (a) {
 	return {$: 'Attr', a: a};
 };
@@ -4538,7 +4557,6 @@ var $mdgriffith$elm_ui$Internal$Model$Unkeyed = function (a) {
 var $elm$core$Basics$append = _Utils_append;
 var $mdgriffith$elm_ui$Internal$Model$AsEl = {$: 'AsEl'};
 var $mdgriffith$elm_ui$Internal$Model$asEl = $mdgriffith$elm_ui$Internal$Model$AsEl;
-var $mdgriffith$elm_ui$Internal$Style$classes = {above: 'a', active: 'atv', alignBottom: 'ab', alignCenterX: 'cx', alignCenterY: 'cy', alignContainerBottom: 'acb', alignContainerCenterX: 'accx', alignContainerCenterY: 'accy', alignContainerRight: 'acr', alignLeft: 'al', alignRight: 'ar', alignTop: 'at', alignedHorizontally: 'ah', alignedVertically: 'av', any: 's', behind: 'bh', below: 'b', bold: 'w7', borderDashed: 'bd', borderDotted: 'bdt', borderNone: 'bn', borderSolid: 'bs', capturePointerEvents: 'cpe', clip: 'cp', clipX: 'cpx', clipY: 'cpy', column: 'c', container: 'ctr', contentBottom: 'cb', contentCenterX: 'ccx', contentCenterY: 'ccy', contentLeft: 'cl', contentRight: 'cr', contentTop: 'ct', cursorPointer: 'cptr', cursorText: 'ctxt', focus: 'fcs', focusedWithin: 'focus-within', fullSize: 'fs', grid: 'g', hasBehind: 'hbh', heightContent: 'hc', heightExact: 'he', heightFill: 'hf', heightFillPortion: 'hfp', hover: 'hv', imageContainer: 'ic', inFront: 'fr', inputLabel: 'lbl', inputMultiline: 'iml', inputMultilineFiller: 'imlf', inputMultilineParent: 'imlp', inputMultilineWrapper: 'implw', inputText: 'it', italic: 'i', link: 'lnk', nearby: 'nb', noTextSelection: 'notxt', onLeft: 'ol', onRight: 'or', opaque: 'oq', overflowHidden: 'oh', page: 'pg', paragraph: 'p', passPointerEvents: 'ppe', root: 'ui', row: 'r', scrollbars: 'sb', scrollbarsX: 'sbx', scrollbarsY: 'sby', seButton: 'sbt', single: 'e', sizeByCapital: 'cap', spaceEvenly: 'sev', strike: 'sk', text: 't', textCenter: 'tc', textExtraBold: 'w8', textExtraLight: 'w2', textHeavy: 'w9', textJustify: 'tj', textJustifyAll: 'tja', textLeft: 'tl', textLight: 'w3', textMedium: 'w5', textNormalWeight: 'w4', textRight: 'tr', textSemiBold: 'w6', textThin: 'w1', textUnitalicized: 'tun', transition: 'ts', transparent: 'clr', underline: 'u', widthContent: 'wc', widthExact: 'we', widthFill: 'wf', widthFillPortion: 'wfp', wrapped: 'wrp'};
 var $elm$core$Result$Err = function (a) {
 	return {$: 'Err', a: a};
 };
@@ -4615,7 +4633,6 @@ var $elm$core$List$length = function (xs) {
 };
 var $elm$core$List$map2 = _List_map2;
 var $elm$core$Basics$le = _Utils_le;
-var $elm$core$Basics$sub = _Basics_sub;
 var $elm$core$List$rangeHelp = F3(
 	function (lo, hi, list) {
 		rangeHelp:
@@ -4806,7 +4823,6 @@ var $elm$core$Basics$apR = F2(
 var $elm$core$Basics$eq = _Utils_equal;
 var $elm$core$Basics$floor = _Basics_floor;
 var $elm$core$Elm$JsArray$length = _JsArray_length;
-var $elm$core$Basics$gt = _Utils_gt;
 var $elm$core$Basics$max = F2(
 	function (x, y) {
 		return (_Utils_cmp(x, y) > 0) ? x : y;
@@ -5122,16 +5138,6 @@ var $mdgriffith$elm_ui$Internal$Model$addKeyedChildren = F3(
 	});
 var $mdgriffith$elm_ui$Internal$Model$AsParagraph = {$: 'AsParagraph'};
 var $mdgriffith$elm_ui$Internal$Model$asParagraph = $mdgriffith$elm_ui$Internal$Model$AsParagraph;
-var $mdgriffith$elm_ui$Internal$Flag$Flag = function (a) {
-	return {$: 'Flag', a: a};
-};
-var $mdgriffith$elm_ui$Internal$Flag$Second = function (a) {
-	return {$: 'Second', a: a};
-};
-var $elm$core$Bitwise$shiftLeftBy = _Bitwise_shiftLeftBy;
-var $mdgriffith$elm_ui$Internal$Flag$flag = function (i) {
-	return (i > 31) ? $mdgriffith$elm_ui$Internal$Flag$Second(1 << (i - 32)) : $mdgriffith$elm_ui$Internal$Flag$Flag(1 << i);
-};
 var $mdgriffith$elm_ui$Internal$Flag$alignBottom = $mdgriffith$elm_ui$Internal$Flag$flag(41);
 var $mdgriffith$elm_ui$Internal$Flag$alignRight = $mdgriffith$elm_ui$Internal$Flag$flag(40);
 var $mdgriffith$elm_ui$Internal$Flag$centerX = $mdgriffith$elm_ui$Internal$Flag$flag(42);
@@ -10712,10 +10718,6 @@ var $mdgriffith$elm_ui$Element$Input$onKeyLookup = function (lookup) {
 				},
 				isKey)));
 };
-var $mdgriffith$elm_ui$Internal$Model$Class = F2(
-	function (a, b) {
-		return {$: 'Class', a: a, b: b};
-	});
 var $mdgriffith$elm_ui$Internal$Flag$cursor = $mdgriffith$elm_ui$Internal$Flag$flag(21);
 var $mdgriffith$elm_ui$Element$pointer = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$cursor, $mdgriffith$elm_ui$Internal$Style$classes.cursorPointer);
 var $mdgriffith$elm_ui$Internal$Model$Content = {$: 'Content'};
@@ -10847,6 +10849,7 @@ var $mdgriffith$elm_ui$Element$el = F2(
 				_List_fromArray(
 					[child])));
 	});
+var $mdgriffith$elm_ui$Element$Font$italic = $mdgriffith$elm_ui$Internal$Model$htmlClass($mdgriffith$elm_ui$Internal$Style$classes.italic);
 var $mdgriffith$elm_ui$Element$Input$Label = F3(
 	function (a, b, c) {
 		return {$: 'Label', a: a, b: b, c: c};
@@ -11148,6 +11151,35 @@ var $mdgriffith$elm_ui$Element$padding = function (x) {
 			f,
 			f));
 };
+var $mdgriffith$elm_ui$Element$paddingXY = F2(
+	function (x, y) {
+		if (_Utils_eq(x, y)) {
+			var f = x;
+			return A2(
+				$mdgriffith$elm_ui$Internal$Model$StyleClass,
+				$mdgriffith$elm_ui$Internal$Flag$padding,
+				A5(
+					$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+					'p-' + $elm$core$String$fromInt(x),
+					f,
+					f,
+					f,
+					f));
+		} else {
+			var yFloat = y;
+			var xFloat = x;
+			return A2(
+				$mdgriffith$elm_ui$Internal$Model$StyleClass,
+				$mdgriffith$elm_ui$Internal$Flag$padding,
+				A5(
+					$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+					'p-' + ($elm$core$String$fromInt(x) + ('-' + $elm$core$String$fromInt(y))),
+					yFloat,
+					xFloat,
+					yFloat,
+					xFloat));
+		}
+	});
 var $mdgriffith$elm_ui$Internal$Model$Px = function (a) {
 	return {$: 'Px', a: a};
 };
@@ -11179,6 +11211,12 @@ var $mdgriffith$elm_ui$Element$row = F2(
 						attrs))),
 			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
 	});
+var $mdgriffith$elm_ui$Element$Font$size = function (i) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$fontSize,
+		$mdgriffith$elm_ui$Internal$Model$FontSize(i));
+};
 var $mdgriffith$elm_ui$Internal$Model$SpacingStyle = F3(
 	function (a, b, c) {
 		return {$: 'SpacingStyle', a: a, b: b, c: c};
@@ -11374,35 +11412,6 @@ var $mdgriffith$elm_ui$Element$rgb = F3(
 		return A4($mdgriffith$elm_ui$Internal$Model$Rgba, r, g, b, 1);
 	});
 var $mdgriffith$elm_ui$Element$Input$darkGrey = A3($mdgriffith$elm_ui$Element$rgb, 186 / 255, 189 / 255, 182 / 255);
-var $mdgriffith$elm_ui$Element$paddingXY = F2(
-	function (x, y) {
-		if (_Utils_eq(x, y)) {
-			var f = x;
-			return A2(
-				$mdgriffith$elm_ui$Internal$Model$StyleClass,
-				$mdgriffith$elm_ui$Internal$Flag$padding,
-				A5(
-					$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
-					'p-' + $elm$core$String$fromInt(x),
-					f,
-					f,
-					f,
-					f));
-		} else {
-			var yFloat = y;
-			var xFloat = x;
-			return A2(
-				$mdgriffith$elm_ui$Internal$Model$StyleClass,
-				$mdgriffith$elm_ui$Internal$Flag$padding,
-				A5(
-					$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
-					'p-' + ($elm$core$String$fromInt(x) + ('-' + $elm$core$String$fromInt(y))),
-					yFloat,
-					xFloat,
-					yFloat,
-					xFloat));
-		}
-	});
 var $mdgriffith$elm_ui$Element$Input$defaultTextPadding = A2($mdgriffith$elm_ui$Element$paddingXY, 12, 12);
 var $mdgriffith$elm_ui$Internal$Model$Fill = function (a) {
 	return {$: 'Fill', a: a};
@@ -12208,7 +12217,7 @@ var $author$project$Main$view = function (model) {
 								label: A2(
 									$mdgriffith$elm_ui$Element$Input$labelRight,
 									_List_Nil,
-									$mdgriffith$elm_ui$Element$text('delicious Pizza(s)')),
+									$mdgriffith$elm_ui$Element$text('very superbly delicious Pizza(s)')),
 								onChange: $author$project$Main$UpdateCount,
 								placeholder: $elm$core$Maybe$Nothing,
 								text: $elm$core$String$fromInt(model.count)
@@ -12261,68 +12270,81 @@ var $author$project$Main$view = function (model) {
 						text: $elm$core$String$fromFloat(model.water)
 					}),
 					A2(
-					$mdgriffith$elm_ui$Element$el,
+					$mdgriffith$elm_ui$Element$column,
 					_List_fromArray(
 						[
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(20))
+							$mdgriffith$elm_ui$Element$centerX,
+							$mdgriffith$elm_ui$Element$spacing(25),
+							$mdgriffith$elm_ui$Element$Font$size(32)
 						]),
-					$mdgriffith$elm_ui$Element$text('')),
-					A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_Nil,
-					$mdgriffith$elm_ui$Element$text('~~ Recipe ~~')),
-					A2(
-					$mdgriffith$elm_ui$Element$row,
-					_List_Nil,
 					_List_fromArray(
 						[
-							$mdgriffith$elm_ui$Element$text('Flour: '),
-							$mdgriffith$elm_ui$Element$text(
 							A2(
-								$author$project$Main$roundTo,
-								0,
-								$author$project$Main$calcFlour(model))),
-							$mdgriffith$elm_ui$Element$text(' g')
-						])),
-					A2(
-					$mdgriffith$elm_ui$Element$row,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$text('Water: '),
-							$mdgriffith$elm_ui$Element$text(
+							$mdgriffith$elm_ui$Element$el,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Font$italic,
+									$mdgriffith$elm_ui$Element$Font$size(28),
+									$mdgriffith$elm_ui$Element$centerX,
+									A2($mdgriffith$elm_ui$Element$paddingXY, 0, 20)
+								]),
+							$mdgriffith$elm_ui$Element$text('~~ Recipe ~~')),
 							A2(
-								$author$project$Main$roundTo,
-								0,
-								$author$project$Main$calcWater(model))),
-							$mdgriffith$elm_ui$Element$text(' ml')
-						])),
-					A2(
-					$mdgriffith$elm_ui$Element$row,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$text('Salt: '),
-							$mdgriffith$elm_ui$Element$text(
+							$mdgriffith$elm_ui$Element$row,
+							_List_fromArray(
+								[$mdgriffith$elm_ui$Element$Font$bold]),
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$text(
+									A2(
+										$author$project$Main$roundTo,
+										0,
+										$author$project$Main$calcFlour(model))),
+									$mdgriffith$elm_ui$Element$text(' g'),
+									$mdgriffith$elm_ui$Element$text(' Flour')
+								])),
 							A2(
-								$author$project$Main$roundTo,
-								1,
-								$author$project$Main$calcSalt(model))),
-							$mdgriffith$elm_ui$Element$text(' g')
-						])),
-					A2(
-					$mdgriffith$elm_ui$Element$row,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$text('Yeast: '),
-							$mdgriffith$elm_ui$Element$text(
+							$mdgriffith$elm_ui$Element$row,
+							_List_fromArray(
+								[$mdgriffith$elm_ui$Element$Font$bold]),
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$text(
+									A2(
+										$author$project$Main$roundTo,
+										0,
+										$author$project$Main$calcWater(model))),
+									$mdgriffith$elm_ui$Element$text(' ml'),
+									$mdgriffith$elm_ui$Element$text(' Water')
+								])),
 							A2(
-								$author$project$Main$roundTo,
-								2,
-								$author$project$Main$calcYeast(model))),
-							$mdgriffith$elm_ui$Element$text(' g')
+							$mdgriffith$elm_ui$Element$row,
+							_List_fromArray(
+								[$mdgriffith$elm_ui$Element$Font$bold]),
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$text(
+									A2(
+										$author$project$Main$roundTo,
+										1,
+										$author$project$Main$calcSalt(model))),
+									$mdgriffith$elm_ui$Element$text(' g'),
+									$mdgriffith$elm_ui$Element$text(' Salt')
+								])),
+							A2(
+							$mdgriffith$elm_ui$Element$row,
+							_List_fromArray(
+								[$mdgriffith$elm_ui$Element$Font$bold]),
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$text(
+									A2(
+										$author$project$Main$roundTo,
+										2,
+										$author$project$Main$calcYeast(model))),
+									$mdgriffith$elm_ui$Element$text(' g'),
+									$mdgriffith$elm_ui$Element$text(' Yeast')
+								]))
 						]))
 				])));
 };
