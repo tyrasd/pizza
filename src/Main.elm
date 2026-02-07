@@ -8,8 +8,7 @@ import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
 
-type alias Model = { count: Int, weight: Float, water: Float }
-defaults: Model
+type alias Model = { count: Maybe Int, weight: Maybe Float, water: Maybe Float }
 defaults =
   { count = 2
   , weight = 250.0
@@ -17,7 +16,7 @@ defaults =
   }
 
 init : () -> ( Model, Cmd Msg )
-init flags = (defaults, Cmd.none)
+init flags = ({ count = Just defaults.count, weight = Just defaults.weight, water = Just defaults.water }, Cmd.none)
 saltRatio = 0.03
 yeastRatio = 0.002
 
@@ -41,18 +40,18 @@ type Msg = Increment
 update msg model =
   case msg of
     Increment ->
-      { model | count = model.count + 1 }
+      { model | count = Just (Maybe.withDefault defaults.count model.count + 1) }
     Decrement ->
-      { model | count = model.count - 1 }
+      { model | count = Just (Maybe.withDefault defaults.count model.count - 1) }
     UpdateCount val ->
-      { model | count = Maybe.withDefault defaults.count (String.toInt val) }
+      { model | count = String.toInt val }
     UpdateWeight val ->
-      { model | weight = Maybe.withDefault defaults.weight (String.toFloat val) }
+      { model | weight = String.toFloat val }
     UpdateWater val ->
-      { model | water = Maybe.withDefault defaults.water (String.toFloat val) }
+      { model | water = String.toFloat val }
 
-calcFlour model = ((toFloat model.count) * model.weight) / (1 + model.water/100 + saltRatio + yeastRatio)
-calcWater model = (calcFlour model) * model.water / 100
+calcFlour model = ((toFloat (Maybe.withDefault defaults.count model.count)) * (Maybe.withDefault defaults.weight model.weight)) / (1 + (Maybe.withDefault defaults.water model.water)/100 + saltRatio + yeastRatio)
+calcWater model = (calcFlour model) * (Maybe.withDefault defaults.water model.water) / 100
 calcSalt  model = (calcFlour model) * saltRatio
 calcYeast model = (calcFlour model) * yeastRatio
 
@@ -61,12 +60,12 @@ roundTo digits val = String.fromFloat (toFloat (Basics.round (val * 10^digits)) 
 view model = Element.layout [] (column [ spacing 30, centerY, centerX, width (px 390) ]
   [
     row []
-    [ Input.text [] { onChange = UpdateCount , text = String.fromInt model.count   , label = Input.labelRight [] (text "very superbly delicious Pizza(s)"), placeholder = Maybe.Nothing }
+    [ Input.text [] { onChange = UpdateCount, text = Maybe.withDefault "" (Maybe.map String.fromInt model.count)   , label = Input.labelRight [] (text "very superbly delicious Pizza(s)"), placeholder = Just (Input.placeholder [] (text (String.fromInt defaults.count))) }
     , Input.button [ padding 5, spacing 5 ] { onPress = Just Decrement, label = text "-" }
     , Input.button [ padding 5, spacing 5 ] { onPress = Just Increment, label = text "+" }
     ]
-  , Input.text [] { onChange = UpdateWeight, text = String.fromFloat model.weight, label = Input.labelRight [] (text "grams (dough ball weight)"), placeholder = Maybe.Nothing }
-  , Input.text [] { onChange = UpdateWater , text = String.fromFloat model.water , label = Input.labelRight [] (text "% water content (in bakers percents)"), placeholder = Maybe.Nothing }
+  , Input.text [] { onChange = UpdateWeight,  text = Maybe.withDefault "" (Maybe.map String.fromFloat model.weight), label = Input.labelRight [] (text "grams (dough ball weight)"), placeholder = Just (Input.placeholder [] (text (String.fromFloat defaults.weight))) }
+  , Input.text [] { onChange = UpdateWater ,  text = Maybe.withDefault "" (Maybe.map String.fromFloat model.water) , label = Input.labelRight [] (text "% water content (in bakers percents)"), placeholder = Just (Input.placeholder [] (text (String.fromFloat defaults.water))) }
   , column [ centerX, spacing 25, Font.size 32 ]
     [ el [ Font.italic, Font.size 28, centerX, paddingXY 0 20 ] (text "~~ Recipe ~~")
     , row [ Font.bold ] [ text (roundTo 0 (calcFlour model)), text " g" , text " Flour" ] 

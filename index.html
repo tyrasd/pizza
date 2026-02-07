@@ -4514,7 +4514,6 @@ var $author$project$Main$Increment = {$: 'Increment'};
 var $elm$core$Maybe$Just = function (a) {
 	return {$: 'Just', a: a};
 };
-var $elm$core$Maybe$Nothing = {$: 'Nothing'};
 var $author$project$Main$UpdateCount = function (a) {
 	return {$: 'UpdateCount', a: a};
 };
@@ -4550,6 +4549,7 @@ var $mdgriffith$elm_ui$Internal$Model$Button = {$: 'Button'};
 var $mdgriffith$elm_ui$Internal$Model$Describe = function (a) {
 	return {$: 'Describe', a: a};
 };
+var $elm$core$Maybe$Nothing = {$: 'Nothing'};
 var $elm$core$Basics$True = {$: 'True'};
 var $mdgriffith$elm_ui$Internal$Model$Unkeyed = function (a) {
 	return {$: 'Unkeyed', a: a};
@@ -10788,16 +10788,17 @@ var $mdgriffith$elm_ui$Element$Input$button = F2(
 				_List_fromArray(
 					[label])));
 	});
+var $author$project$Main$defaults = {count: 2, water: 57.0, weight: 250.0};
 var $author$project$Main$saltRatio = 0.03;
 var $author$project$Main$yeastRatio = 0.002;
 var $author$project$Main$calcFlour = function (model) {
-	return (model.count * model.weight) / (((1 + (model.water / 100)) + $author$project$Main$saltRatio) + $author$project$Main$yeastRatio);
+	return (A2($elm$core$Maybe$withDefault, $author$project$Main$defaults.count, model.count) * A2($elm$core$Maybe$withDefault, $author$project$Main$defaults.weight, model.weight)) / (((1 + (A2($elm$core$Maybe$withDefault, $author$project$Main$defaults.water, model.water) / 100)) + $author$project$Main$saltRatio) + $author$project$Main$yeastRatio);
 };
 var $author$project$Main$calcSalt = function (model) {
 	return $author$project$Main$calcFlour(model) * $author$project$Main$saltRatio;
 };
 var $author$project$Main$calcWater = function (model) {
-	return ($author$project$Main$calcFlour(model) * model.water) / 100;
+	return ($author$project$Main$calcFlour(model) * A2($elm$core$Maybe$withDefault, $author$project$Main$defaults.water, model.water)) / 100;
 };
 var $author$project$Main$calcYeast = function (model) {
 	return $author$project$Main$calcFlour(model) * $author$project$Main$yeastRatio;
@@ -11180,6 +11181,11 @@ var $mdgriffith$elm_ui$Element$paddingXY = F2(
 					xFloat));
 		}
 	});
+var $mdgriffith$elm_ui$Element$Input$Placeholder = F2(
+	function (a, b) {
+		return {$: 'Placeholder', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Element$Input$placeholder = $mdgriffith$elm_ui$Element$Input$Placeholder;
 var $mdgriffith$elm_ui$Internal$Model$Px = function (a) {
 	return {$: 'Px', a: a};
 };
@@ -12219,8 +12225,16 @@ var $author$project$Main$view = function (model) {
 									_List_Nil,
 									$mdgriffith$elm_ui$Element$text('very superbly delicious Pizza(s)')),
 								onChange: $author$project$Main$UpdateCount,
-								placeholder: $elm$core$Maybe$Nothing,
-								text: $elm$core$String$fromInt(model.count)
+								placeholder: $elm$core$Maybe$Just(
+									A2(
+										$mdgriffith$elm_ui$Element$Input$placeholder,
+										_List_Nil,
+										$mdgriffith$elm_ui$Element$text(
+											$elm$core$String$fromInt($author$project$Main$defaults.count)))),
+								text: A2(
+									$elm$core$Maybe$withDefault,
+									'',
+									A2($elm$core$Maybe$map, $elm$core$String$fromInt, model.count))
 							}),
 							A2(
 							$mdgriffith$elm_ui$Element$Input$button,
@@ -12254,8 +12268,16 @@ var $author$project$Main$view = function (model) {
 							_List_Nil,
 							$mdgriffith$elm_ui$Element$text('grams (dough ball weight)')),
 						onChange: $author$project$Main$UpdateWeight,
-						placeholder: $elm$core$Maybe$Nothing,
-						text: $elm$core$String$fromFloat(model.weight)
+						placeholder: $elm$core$Maybe$Just(
+							A2(
+								$mdgriffith$elm_ui$Element$Input$placeholder,
+								_List_Nil,
+								$mdgriffith$elm_ui$Element$text(
+									$elm$core$String$fromFloat($author$project$Main$defaults.weight)))),
+						text: A2(
+							$elm$core$Maybe$withDefault,
+							'',
+							A2($elm$core$Maybe$map, $elm$core$String$fromFloat, model.weight))
 					}),
 					A2(
 					$mdgriffith$elm_ui$Element$Input$text,
@@ -12266,8 +12288,16 @@ var $author$project$Main$view = function (model) {
 							_List_Nil,
 							$mdgriffith$elm_ui$Element$text('% water content (in bakers percents)')),
 						onChange: $author$project$Main$UpdateWater,
-						placeholder: $elm$core$Maybe$Nothing,
-						text: $elm$core$String$fromFloat(model.water)
+						placeholder: $elm$core$Maybe$Just(
+							A2(
+								$mdgriffith$elm_ui$Element$Input$placeholder,
+								_List_Nil,
+								$mdgriffith$elm_ui$Element$text(
+									$elm$core$String$fromFloat($author$project$Main$defaults.water)))),
+						text: A2(
+							$elm$core$Maybe$withDefault,
+							'',
+							A2($elm$core$Maybe$map, $elm$core$String$fromFloat, model.water))
 					}),
 					A2(
 					$mdgriffith$elm_ui$Element$column,
@@ -12584,11 +12614,16 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$document = _Browser_document;
-var $author$project$Main$defaults = {count: 2, water: 57.0, weight: 250.0};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (flags) {
-	return _Utils_Tuple2($author$project$Main$defaults, $elm$core$Platform$Cmd$none);
+	return _Utils_Tuple2(
+		{
+			count: $elm$core$Maybe$Just($author$project$Main$defaults.count),
+			water: $elm$core$Maybe$Just($author$project$Main$defaults.water),
+			weight: $elm$core$Maybe$Just($author$project$Main$defaults.weight)
+		},
+		$elm$core$Platform$Cmd$none);
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
@@ -12602,40 +12637,37 @@ var $author$project$Main$update = F2(
 			case 'Increment':
 				return _Utils_update(
 					model,
-					{count: model.count + 1});
+					{
+						count: $elm$core$Maybe$Just(
+							A2($elm$core$Maybe$withDefault, $author$project$Main$defaults.count, model.count) + 1)
+					});
 			case 'Decrement':
 				return _Utils_update(
 					model,
-					{count: model.count - 1});
+					{
+						count: $elm$core$Maybe$Just(
+							A2($elm$core$Maybe$withDefault, $author$project$Main$defaults.count, model.count) - 1)
+					});
 			case 'UpdateCount':
 				var val = msg.a;
 				return _Utils_update(
 					model,
 					{
-						count: A2(
-							$elm$core$Maybe$withDefault,
-							$author$project$Main$defaults.count,
-							$elm$core$String$toInt(val))
+						count: $elm$core$String$toInt(val)
 					});
 			case 'UpdateWeight':
 				var val = msg.a;
 				return _Utils_update(
 					model,
 					{
-						weight: A2(
-							$elm$core$Maybe$withDefault,
-							$author$project$Main$defaults.weight,
-							$elm$core$String$toFloat(val))
+						weight: $elm$core$String$toFloat(val)
 					});
 			default:
 				var val = msg.a;
 				return _Utils_update(
 					model,
 					{
-						water: A2(
-							$elm$core$Maybe$withDefault,
-							$author$project$Main$defaults.water,
-							$elm$core$String$toFloat(val))
+						water: $elm$core$String$toFloat(val)
 					});
 		}
 	});
